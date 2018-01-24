@@ -832,7 +832,6 @@ class Wmain(SimpleGladeApp):
                 self.addTab(ntbk, tab.get_text())
             else:
                 host = term.host.clone()
-                host.name = tab.get_text()
                 host.log = hasattr(term, "log_handler_id") and term.log_handler_id != 0
                 self.addTab(ntbk, host)
             return True
@@ -1169,7 +1168,7 @@ class Wmain(SimpleGladeApp):
             scrollPane = gtk.ScrolledWindow()
             scrollPane.connect('button_press_event', lambda *args: True)
             scrollPane.set_property('hscrollbar-policy', gtk.POLICY_NEVER)
-            tab = NotebookTabLabel("  %s  " % (host.name), self.nbConsole, scrollPane, self.popupMenuTab )
+            tab = NotebookTabLabel("  %s%s  " % ((host.group + '/') if host.group is not None else '', host.name), self.nbConsole, scrollPane, self.popupMenuTab)
 
             v.connect("child-exited", lambda widget: tab.mark_tab_as_closed())
             v.connect('focus', self.on_tab_focus)
