@@ -2619,6 +2619,10 @@ class Whost(SimpleGladeApp):
     #-- Whost.on_btnDel_clicked {
     def on_btnDel_clicked(self, widget, *args):
         if self.treeTunel.get_selection().get_selected()[1]!=None:
+            self.txtLocalPort.set_text(self.treeModel.get_value(self.treeTunel.get_selection().get_selected()[1], 0))
+            self.txtRemoteHost.set_text(self.treeModel.get_value(self.treeTunel.get_selection().get_selected()[1], 1))
+            self.txtRemotePort.set_text(self.treeModel.get_value(self.treeTunel.get_selection().get_selected()[1], 2))
+
             self.treeModel.remove(self.treeTunel.get_selection().get_selected()[1])
     #-- Whost.on_btnDel_clicked }
 
