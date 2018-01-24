@@ -223,6 +223,8 @@ except:
     error.run()
     sys.exit (1)
 
+import hashlib
+
 app_name = "Gnome Connection Manager"
 app_version = "1.1.0"
 app_web = "http://www.kuthulu.com/gcm"
@@ -490,7 +492,7 @@ def decrypt_old(passw, string):
     return s
 
 def encrypt(passw, string):
-    aes = pyaes.AESModeOfOperationCTR(passw)
+    aes = pyaes.AESModeOfOperationCTR(password_to_key(passw))
     try:
         s = aes.encrypt(string)
     except:
@@ -498,12 +500,17 @@ def encrypt(passw, string):
     return s
 
 def decrypt(passw, string):
-    aes = pyaes.AESModeOfOperationCTR(passw)
+    aes = pyaes.AESModeOfOperationCTR(password_to_key(passw))
     try:
         s = decrypt_old(passw, string) if conf.VERSION == 0 else aes.decrypt(string)
     except:
         s = ""
     return s
+
+def password_to_key(password):
+    md5 = hashlib.md5()
+    md5.update(password)
+    return md5.hexdigest()
 
 class Wmain(SimpleGladeApp):
 
