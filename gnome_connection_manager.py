@@ -1398,11 +1398,11 @@ class Wmain(SimpleGladeApp):
         try:
             scuts[cp.get("shortcuts", "find_next")] = _FIND_NEXT
         except:
-            scuts["F3"] = _FIND_NEXT
+            scuts["CTRL+F3"] = _FIND_NEXT
         try:
             scuts[cp.get("shortcuts", "find_back")] = _FIND_BACK
         except:
-            scuts["SHIFT+F3"] = _FIND_BACK
+            scuts["CTRL+SHIFT+F3"] = _FIND_BACK
 
         try:
             scuts[cp.get("shortcuts", "console_previous")] = _CONSOLE_PREV
@@ -1417,7 +1417,7 @@ class Wmain(SimpleGladeApp):
         try:
             scuts[cp.get("shortcuts", "console_close")] = _CONSOLE_CLOSE
         except:
-            scuts["CTRL+W"] = _CONSOLE_CLOSE
+            scuts["CTRL+SHIFT+W"] = _CONSOLE_CLOSE
 
         try:
             scuts[cp.get("shortcuts", "console_reconnect")] = _CONSOLE_RECONNECT
@@ -1436,11 +1436,12 @@ class Wmain(SimpleGladeApp):
             scuts["CTRL+K"] = _CLEAR
 
         #shortcuts para cambiar consola1-consola9
-        for x in range(1,10):
-            try:
-                scuts[cp.get("shortcuts", "console_%d" % (x) )] = eval("_CONSOLE_%d" % (x))
-            except:
-                scuts["F%d" % (x)] = eval("_CONSOLE_%d" % (x))
+        # for x in range(1,10):
+        #     try:
+        #         scuts[cp.get("shortcuts", "console_%d" % (x) )] = eval("_CONSOLE_%d" % (x))
+        #     except:
+        #         scuts["F%d" % (x)] = eval("_CONSOLE_%d" % (x))
+
         try:
             i = 1
             while True:
